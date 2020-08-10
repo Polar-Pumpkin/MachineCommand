@@ -1,0 +1,6 @@
+name: MachineCommand
+version: ${project.version}
+main: org.serverct.parrot.machinecommand.MachineCommand
+api-version: 1.16
+depend: [ParrotStructure, ParrotX]
+authors: [EntityParrot_]

@@ -1,0 +1,28 @@
+Machine:
+  Name: 测试机器
+  Structure:
+    Arch:
+      - - ' x '
+        - 'xxx'
+        - ' x '
+      - - ' a '
+        - 'aba'
+        - ' a '
+      - - ' x '
+        - 'xxx'
+        - ' x '
+    Ingredient:
+      x: STONE
+      a: OAK_FENCE
+      b:
+        Material: DIAMOND_BLOCK
+        Trigger: BOTH
+  Active:
+    ItemStack:
+      Display: "测试钥匙"
+      Material: GOLD_INGOT
+      Lore:
+        - '这插件给我写吐了'
+    Commands:
+      - 'say 爱 狼将军 狂粉'
+      - 'say 谁还没去看喜羊羊与灰太狼之异国大营救？'

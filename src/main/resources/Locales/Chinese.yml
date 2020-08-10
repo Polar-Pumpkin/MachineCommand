@@ -1,0 +1,5 @@
+Plugin:
+  Prefix: "&7[&9&lMachineCommand&7]&r "
+  INFO: "&7[&a&l*&7]&r "
+  WARN: "&7[&e&l!&7]&r "
+  ERROR: "&7[&c&l!&7]&r "
