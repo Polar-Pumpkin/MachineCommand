@@ -1,6 +1,7 @@
 package org.serverct.parrot.machinecommand.data;
 
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -74,9 +75,18 @@ public class Machine extends PData {
                 ConfigurationSection keySection = ingredient.getConfigurationSection(key);
                 if (BasicUtil.isNull(plugin, keySection, I18n.LOAD, getTypeName(), "结构成分数据中的 " + key + " 无效."))
                     continue;
-                ingredientMap.put(symbol, new MachineIngredient(EnumUtil.getMaterial(keySection.getString("Material")), EnumUtil.valueOf(Structure.StructurePart.TriggerType.class, keySection.getString("Trigger"))));
+                ingredientMap.put(symbol, new MachineIngredient(
+                        EnumUtil.getMaterial(keySection.getString("Material")),
+                        EnumUtil.valueOf(Structure.StructurePart.TriggerType.class, keySection.getString("Trigger")),
+                        keySection.getBoolean("Disappear", false),
+                        keySection.getBoolean("Broke", false),
+                        (float) keySection.getDouble("Explode", -1)
+                ));
             } else {
-                ingredientMap.put(symbol, new MachineIngredient(EnumUtil.getMaterial(ingredient.getString(key)), Structure.StructurePart.TriggerType.NONE));
+                ingredientMap.put(symbol, new MachineIngredient(
+                        EnumUtil.getMaterial(ingredient.getString(key)),
+                        Structure.StructurePart.TriggerType.NONE
+                ));
             }
         }
 
@@ -98,7 +108,10 @@ public class Machine extends PData {
                     warps.add(new Structure.StructurePart(
                             ingre.material,
                             ingre.triggerType,
-                            new Structure.RelativeLocation(x, y, z)
+                            new Structure.RelativeLocation(x, y, z),
+                            ingre.disappear,
+                            ingre.explode,
+                            ingre.broke
                     ));
                     z++;
                 }
@@ -114,9 +127,12 @@ public class Machine extends PData {
     }
 
     private @ToString
-    @AllArgsConstructor
+    @AllArgsConstructor @RequiredArgsConstructor
     static class MachineIngredient {
         private final Material material;
         private final Structure.StructurePart.TriggerType triggerType;
+        private boolean disappear = false;
+        private boolean broke = false;
+        private float explode = -1;
     }
 }

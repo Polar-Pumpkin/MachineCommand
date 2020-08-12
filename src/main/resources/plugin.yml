@@ -3,4 +3,5 @@ version: ${project.version}
 main: org.serverct.parrot.machinecommand.MachineCommand
 api-version: 1.16
 depend: [ParrotStructure, ParrotX]
+sofedepend: [PlaceholderAPI]
 authors: [EntityParrot_]
